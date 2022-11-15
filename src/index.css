@@ -1,13 +1,82 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a {
+  color: black;
+  text-decoration: none;
 }
+
+.btn-primary {
+  width: 100px;
+height: 30px;
+border: 2px solid #BD0707;
+border-radius: 5px;
+}
+
+.btn {
+  --bs-btn-padding-x:center;
+}
+
+.btn-danger {
+  width: 350px;
+  height: 50px;
+  margin-top: 31px;
+}
+
+.btn-login {
+  background-color: white !important;
+  color: #BD0707 !important;
+  margin-right: 15px;
+}
+
+.btn-reg {
+  background-color: #BD0707;
+  color: white;
+}
+
+.card {
+  width: 416px;
+}
+
+.card-body {
+  padding: 33px;
+}
+
+.card-body h1 {
+  font-weight: 900;
+  size: 36px;
+  line-height: 49.18px;
+  padding-bottom: 29px;
+  color: #BD0707;
+}
+
+.form-control {
+  margin-top: 20px;
+  width: 350px;
+  height: 50px;
+  border-color:#BD0707 ;
+  background-color: rgba(224, 200, 200, 0.25);
+  
+}
+
+
+   .form-group { 
+
+    align-items: center;
+  }
+
+  .form-group h1 {
+    color: #BD0707;
+  }
+
+  .modal {
+    align-content: center;
+    --bs-modal-padding: 33px;
+    --bs-modal-width: 416px;
+    
+  }
+
+  .navbar {
+    padding: 63px 100px 0;
+  }
