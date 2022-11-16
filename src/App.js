@@ -4,11 +4,7 @@ import Home from './pages/Home';
 
 
 function App() {
-  return (
-    <form>
-    <Home />
-    </form>
-  )
+  return <Home />
 }
 
 export default App;

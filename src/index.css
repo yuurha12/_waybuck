@@ -7,6 +7,16 @@ a {
   text-decoration: none;
 }
 
+.about {
+  width: 958px;
+height: 400px;
+left: 184px;
+top: 181px;
+
+background: #BD0707;
+border-radius: 10px;
+}
+
 .btn-primary {
   width: 100px;
 height: 30px;
@@ -41,6 +51,7 @@ border-radius: 5px;
 
 .card-body {
   padding: 33px;
+  background-color: #F7DADA;
 }
 
 .card-body h1 {
@@ -70,6 +81,11 @@ border-radius: 5px;
     color: #BD0707;
   }
 
+  .jumbo {
+    padding-top: 77px;
+  }
+
+
   .modal {
     align-content: center;
     --bs-modal-padding: 33px;
@@ -77,6 +93,40 @@ border-radius: 5px;
     
   }
 
-  .navbar {
-    padding: 63px 100px 0;
+  .Order {
+    color:#BD0707;
+    ;
+    padding-top: 38px;
+  }
+
+  .Ice {
+    padding-right: 38px;
+    padding-top: 38px;
+    padding-bottom: 86px;
+  }
+
+  .h5, h5 {
+    font-size: 18px;
+  }
+
+  .login {
+    --bs-btn-color: black;
+    width: fit-content;
+    border: unset;
+    background-color: unset;
+    padding-left: 40px;
+    --bs-btn-hover-bg: unset;
+    --bs-btn-hover-border-color: unset;
+    --bs-btn-hover-color: unset;
+  }
+  
+  .reg {
+    --bs-btn-color: black;
+    width: fit-content;
+    border: unset;
+    background-color: unset;
+    padding-left: 40px;
+    --bs-btn-hover-bg: unset;
+    --bs-btn-hover-border-color: unset;
+    --bs-btn-hover-color: unset;
   }

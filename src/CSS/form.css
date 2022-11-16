@@ -1,0 +1,27 @@
+.btn-primary {
+    width: 100px;
+  height: 30px;
+  border: 2px solid #BD0707;
+  border-radius: 5px;
+  }
+  
+  .btn {
+    --bs-btn-padding-x:center;
+  }
+  
+  .btn-danger {
+    width: 350px;
+    height: 50px;
+    margin-top: 31px;
+  }
+  
+  .btn-login {
+    background-color: white !important;
+    color: #BD0707 !important;
+    margin-right: 15px;
+  }
+  
+  .btn-reg {
+    background-color: #BD0707;
+    color: white;
+  }

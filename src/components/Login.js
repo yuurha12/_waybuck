@@ -1,57 +1,70 @@
 import { Button, Form, Modal } from 'react-bootstrap';
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 
 //register route
-import RegForm from './Register';
 
-export default function LoginForm() {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+export default function LoginForm(props) {
 
-  //create state with attribute fullname, email & password here..
+  const [emaillog, setEmaillog] = useState(" ");
+  const [passwordlog, setPasswordlog] = useState(" ");
+  const [flag, setFlag] = useState(false);
+  const [home, setHome] = useState(true);
+  const [login, setLogin] = useState(true);
 
-  const handleOnChange = (e) => {
-    // setState here
+
+  
+
+  function handleLogin(e) {
+    e.preventDefault();
+    let pass = localStorage
+      .getItem("password")
+      .replace(/"/g, "");
+    let mail = localStorage.getItem("email").replace(/"/g, "");
+    
+
+    if (!emaillog || !passwordlog) {
+      setFlag(true);
+      console.log("EMPTY");
+    } else if (passwordlog !== pass || emaillog !== mail) {
+      setFlag(true);
+    } else {
+      setHome(!home);
+      setFlag(false);
+    }
+    setLogin(!login);
   }
-
-  const handleOnSubmit = (e) => {
-    e.preventDefault()
-    //print state value with console.log here
+  function handleClick() {
+    setLogin(!login);
   }
 
   return (
     <>
-      <Button className='btn-login' variant="primary" onClick={handleShow}>
-        Login
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
+      <Modal {...props}>
         <Modal.Body>
-        <Router>
 <div className='form-group'>
-    <Form>
+    <Form onSubmit={handleLogin}>
         <h1>LOGIN</h1>
       <Form.Group controlId="formBasicEmail">
-        <Form.Control type="email" placeholder="Email" />
+        <Form.Control 
+         onChange={(event) => setEmaillog(event.target.value)}
+        name="email" 
+        type="email" 
+        placeholder="Email" 
+        />
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control
+         onChange={(event) => setPasswordlog(event.target.value)}
+         name="password"
+         type="password" 
+         placeholder="Password" 
+        />
       </Form.Group>
-      <Button variant="danger">Login</Button>{' '}
-      <ul>
-        <li>
-          <Link to="/register">Don't have an account ? Klik Here</Link>
-        </li>
-      </ul>
+      <Button variant="danger" type='submit'>Login</Button>{' '}
+      <Button className='login' onClick={props.onRegis}>
+      Don't have an account ? Klik Here</Button>
     </Form>
 </div>
-
-<Routes>
-  <Route exact path='/register' element={<RegForm />} />
-</Routes>
-</Router>
         </Modal.Body>
       </Modal>
     </>

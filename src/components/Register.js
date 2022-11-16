@@ -1,60 +1,95 @@
 import { Button, Form, Modal } from 'react-bootstrap';
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
 
 //register route
-import LoginForm from './Login';
 
-export default function RegForm() {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+export default function RegForm(props) {
+  const [flag, setFlag] = useState(false);
+  const [login, setLogin] = useState(true);
 
   //create state with attribute fullname, email & password here..
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+    fullname: "",
+  });
+
+  useEffect(() => {
+    localStorage.setItem('state', JSON.stringify(state));
+  }, [state]);
+
+  console.log(localStorage)
+
+  
 
   const handleOnChange = (e) => {
     // setState here
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    })
   }
 
   const handleOnSubmit = (e) => {
-    e.preventDefault()
-    //print state value with console.log here
+    e.preventDefault();
+
+    if (!state.email || !state.password ||!state.fullname ) {
+      setFlag(true);
+    } else {
+      setFlag(false);
+      localStorage.setItem("email", JSON.stringify(state.email));
+      localStorage.setItem("password", JSON.stringify(state.password));
+      localStorage.setItem("fullname", JSON.stringify(state.fullname));
+      console.log("Saved in Local Storage");
+
+    }
+      setLogin(!login);
+  }
+    function handleClick() {
+      setLogin(!login);
   }
 
   return (
     <>
-      <Button className='btn-reg' variant="primary" onClick={handleShow}>
-        Register
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
+      <Modal {...props}>
         <Modal.Body>
-        <Router>
 <div className='form-group'>
-    <Form>
+    <Form onSubmit={handleOnSubmit}>
         <h1>REGISTER</h1>
       <Form.Group controlId="formBasicEmail">
-        <Form.Control type="email" placeholder="Email" />
+        <Form.Control 
+        onChange={handleOnChange} 
+        value={state.email}
+        name="email" 
+        type="email" 
+        placeholder="Email" 
+        />
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control 
+        onChange={handleOnChange} 
+        value={state.password}
+        name="password"
+        type="password" 
+        placeholder="Password" 
+        />
         </Form.Group>
         <Form.Group controlId="formBasicName">
-        <Form.Control type="text" placeholder="Full Name" />
+        <Form.Control
+        onChange={handleOnChange} 
+        value={state.fullname} 
+        name="fullname"
+        type="text" 
+        placeholder="Full Name" 
+        />
       </Form.Group>
-      <Button variant="danger">Register</Button>{' '}
-      <ul>
-        <li>
-          <Link to="/login">Already have an account ? Klik Here</Link>
-        </li>
-      </ul>
+      <div>
+
+      <Button variant="danger" type='submit'>Register</Button>
+      <Button className='reg' onClick={props.onLogin}>Already have an account ? Klik Here</Button>
+      </div>
     </Form>
 </div>
-
-<Routes>
-  <Route exact path='/register' element={<LoginForm />} />
-</Routes>
-</Router>
         </Modal.Body>
       </Modal>
     </>
