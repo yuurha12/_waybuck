@@ -109,6 +109,14 @@ border-radius: 5px;
     font-size: 18px;
   }
 
+  .hero {
+    width: 958px;
+    height: 400px;
+    margin-top: 40px;
+    background: #BD0707;
+    border-radius: 10px;
+  }
+
   .login {
     --bs-btn-color: black;
     width: fit-content;
@@ -129,4 +137,63 @@ border-radius: 5px;
     --bs-btn-hover-bg: unset;
     --bs-btn-hover-border-color: unset;
     --bs-btn-hover-color: unset;
+  }
+
+  .text-hero {
+    margin-top: 45px;
+    margin-left: 42px;
+    color: white;
+  }
+
+  .t1 {
+    width: 357px;
+    height: 65px;
+    left: 241px;
+    top: 240px;
+
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 65px;
+  }
+
+  .t2 {
+    width: 505px;
+    height: 33px;
+    left: 247px;
+    top: 321px;
+
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 33px;
+  }
+
+  .t3 {
+    width: 469px;
+    left: 247px;
+
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  .t4 {
+    width: 469px;
+    left: 247px;
+
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  .jumbo2 {
+    position: absolute;
+    width: 451px;
+    height: 324px;
+    left: 620px;
+    border-radius: 0px 10px 10px 0px;
+    margin-top: 20px;
   }
