@@ -1,4 +1,4 @@
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import React, { useState } from 'react';
 
 //register route
@@ -7,7 +7,7 @@ export default function LoginForm(props) {
 
   const [emaillog, setEmaillog] = useState(" ");
   const [passwordlog, setPasswordlog] = useState(" ");
-  const [flag, setFlag] = useState(false);
+  const [status, setStatus] = useState(false);
   const [home, setHome] = useState(true);
   const [login, setLogin] = useState(true);
 
@@ -16,20 +16,20 @@ export default function LoginForm(props) {
 
   function handleLogin(e) {
     e.preventDefault();
-    let pass = localStorage
+    let password = localStorage
       .getItem("password")
       .replace(/"/g, "");
-    let mail = localStorage.getItem("email").replace(/"/g, "");
+    let email = localStorage.getItem("email").replace(/"/g, "");
     
 
     if (!emaillog || !passwordlog) {
-      setFlag(true);
+      setStatus(true);
       console.log("EMPTY");
-    } else if (passwordlog !== pass || emaillog !== mail) {
-      setFlag(true);
+    } else if (passwordlog !== password || emaillog !== email) {
+      setStatus(true);
     } else {
       setHome(!home);
-      setFlag(false);
+      setStatus(false);
     }
     setLogin(!login);
   }
@@ -39,6 +39,7 @@ export default function LoginForm(props) {
 
   return (
     <>
+    {home ? (
       <Modal {...props}>
         <Modal.Body>
 <div className='form-group'>
@@ -60,13 +61,16 @@ export default function LoginForm(props) {
          placeholder="Password" 
         />
       </Form.Group>
-      <Button variant="danger" type='submit'>Login</Button>{' '}
+      <Button onClick={handleClick} variant="danger" type='submit'>Login</Button>{' '}
       <Button className='login' onClick={props.onRegis}>
       Don't have an account ? Klik Here</Button>
     </Form>
 </div>
         </Modal.Body>
       </Modal>
+      ) : (
+     <Alert>LOGIN SUCCESS</Alert>
+      )}
     </>
   );
   }  

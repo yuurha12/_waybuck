@@ -1,11 +1,10 @@
 import { Button, Form, Modal } from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 //register route
 
 export default function RegForm(props) {
-  const [flag, setFlag] = useState(false);
-  const [login, setLogin] = useState(true);
+  
 
   //create state with attribute fullname, email & password here..
   const [state, setState] = useState({
@@ -13,12 +12,6 @@ export default function RegForm(props) {
     password: "",
     fullname: "",
   });
-
-  useEffect(() => {
-    localStorage.setItem('state', JSON.stringify(state));
-  }, [state]);
-
-  console.log(localStorage)
 
   
 
@@ -32,22 +25,13 @@ export default function RegForm(props) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
-    if (!state.email || !state.password ||!state.fullname ) {
-      setFlag(true);
-    } else {
-      setFlag(false);
       localStorage.setItem("email", JSON.stringify(state.email));
       localStorage.setItem("password", JSON.stringify(state.password));
       localStorage.setItem("fullname", JSON.stringify(state.fullname));
       console.log("Saved in Local Storage");
+      alert("You have been registered ")
+  }
 
-    }
-      setLogin(!login);
-  }
-    function handleClick() {
-      setLogin(!login);
-  }
 
   return (
     <>
@@ -85,7 +69,7 @@ export default function RegForm(props) {
       </Form.Group>
       <div>
 
-      <Button variant="danger" type='submit'>Register</Button>
+      <Button variant="danger" onClick={props.onLogin} type='submit'>Register</Button>
       <Button className='reg' onClick={props.onLogin}>Already have an account ? Klik Here</Button>
       </div>
     </Form>

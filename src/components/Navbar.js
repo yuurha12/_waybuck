@@ -12,7 +12,7 @@ export default function NavBar() {
   
     
       return (
-      <Navbar bg="white" variant="white">
+      <Navbar className="nav-bg" bg="light" variant="light">
         <Container>
           <Navbar.Brand> <img src={require('../assets/images/Group.png')} alt=""/>
           </Navbar.Brand>
