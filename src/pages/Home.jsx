@@ -1,6 +1,5 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavBar from '../components/Navbar';
 import Waysbucks from '../components/Hero';
 import Order from '../components/Order';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -8,11 +7,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 export default function Home () {
 
     return (
-        <div>
-            <nav>
-                <NavBar />
-            </nav>
-            <div>
             <Container>
                 <Waysbucks />
                 <Row>
@@ -20,7 +14,5 @@ export default function Home () {
                     <Col><Order /></Col>
                 </Row>
             </Container>
-            </div>
-        </div>
     )
 }

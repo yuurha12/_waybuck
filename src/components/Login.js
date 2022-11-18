@@ -1,53 +1,52 @@
-import { Alert, Button, Form, Modal } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 import React, { useState } from 'react';
 
 //register route
 
-export default function LoginForm(props) {
+const LoginForm = ({show,Hide, setModalRegisterShow,setModalLoginShow}) => {
 
-  const [emaillog, setEmaillog] = useState(" ");
-  const [passwordlog, setPasswordlog] = useState(" ");
-  const [status, setStatus] = useState(false);
-  const [home, setHome] = useState(true);
-  const [login, setLogin] = useState(true);
-
-
+  const users = []
   
+  const [userLogin, setState] = useState({
+    email: "",
+    password: "",
+  })
 
-  function handleLogin(e) {
+  const handleOnChange = (e) => {
+    // setState here
+    setState({
+      ...userLogin,
+      [e.target.name]: e.target.value,
+    })
+  }
+  
+  let storage = JSON.parse(localStorage.getItem("DATA_USER"))
+  
+  const handleOnSubmit = (e) => {
     e.preventDefault();
-    let password = localStorage
-      .getItem("password")
-      .replace(/"/g, "");
-    let email = localStorage.getItem("email").replace(/"/g, "");
-    
+    storage.forEach(element => {
+      if (userLogin.email === element.email && userLogin.password === element.password ) {
+        users.push(userLogin)
+        localStorage.setItem("LOGIN_STATUS", JSON.stringify(users))
+        setModalLoginShow(false)
+      } else {
+        console.log(users)
+      }
+      
+    });
+  }
 
-    if (!emaillog || !passwordlog) {
-      setStatus(true);
-      console.log("EMPTY");
-    } else if (passwordlog !== password || emaillog !== email) {
-      setStatus(true);
-    } else {
-      setHome(!home);
-      setStatus(false);
-    }
-    setLogin(!login);
-  }
-  function handleClick() {
-    setLogin(!login);
-  }
 
   return (
     <>
-    {home ? (
-      <Modal {...props}>
+      <Modal show={show} onHide={Hide}>
         <Modal.Body>
 <div className='form-group'>
-    <Form onSubmit={handleLogin}>
+    <Form onSubmit={handleOnSubmit}>
         <h1>LOGIN</h1>
       <Form.Group controlId="formBasicEmail">
         <Form.Control 
-         onChange={(event) => setEmaillog(event.target.value)}
+         onChange={handleOnChange}
         name="email" 
         type="email" 
         placeholder="Email" 
@@ -55,22 +54,20 @@ export default function LoginForm(props) {
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
         <Form.Control
-         onChange={(event) => setPasswordlog(event.target.value)}
+         onChange={handleOnChange}
          name="password"
          type="password" 
          placeholder="Password" 
         />
       </Form.Group>
-      <Button onClick={handleClick} variant="danger" type='submit'>Login</Button>{' '}
-      <Button className='login' onClick={props.onRegis}>
-      Don't have an account ? Klik Here</Button>
+      <Button variant="danger" type='submit'>Login</Button>{' '}
+      <p style={{fontSize: "11pt", margin: "8px 0 0"}}>Don't have an account ? Click <span className='btn text-info' style={{border: "none", padding: "0"}} onClick={() => {setModalRegisterShow(true); setModalLoginShow(false)}}>here</span></p>
     </Form>
 </div>
         </Modal.Body>
       </Modal>
-      ) : (
-     <Alert>LOGIN SUCCESS</Alert>
-      )}
     </>
   );
   }  
+
+export default LoginForm

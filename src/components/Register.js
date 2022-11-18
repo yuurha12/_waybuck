@@ -3,39 +3,51 @@ import React, { useState } from 'react';
 
 //register route
 
-export default function RegForm(props) {
-  
+const Regform = ({show,Hide, setModalRegisterShow,setModalLoginShow}) => {
+  const users = []
 
-  //create state with attribute fullname, email & password here..
-  const [state, setState] = useState({
+  const [userData, setState] = useState({
     email: "",
     password: "",
-    fullname: "",
-  });
+    fullname: ""
+  })
 
-  
+  const addUserData = JSON.parse(localStorage.getItem("DATA_USER"))
 
   const handleOnChange = (e) => {
     // setState here
     setState({
-      ...state,
+      ...userData,
       [e.target.name]: e.target.value,
     })
   }
 
+
   const handleOnSubmit = (e) => {
-    e.preventDefault();
-      localStorage.setItem("email", JSON.stringify(state.email));
-      localStorage.setItem("password", JSON.stringify(state.password));
-      localStorage.setItem("fullname", JSON.stringify(state.fullname));
-      console.log("Saved in Local Storage");
-      alert("You have been registered ")
+    e.preventDefault()
+    
+    if (addUserData === null) {
+      users.push(userData)
+      localStorage.setItem("DATA_USER", JSON.stringify(users))
+
+    } else {
+      addUserData.forEach(element => {
+        users.push(element)
+      })
+      users.push(userData)
+      localStorage.setItem("DATA_USER", JSON.stringify(users))
+    }
+      console.log(users.length)
+      
+
+      setModalRegisterShow(false)
+      setModalLoginShow(true)
   }
 
 
   return (
     <>
-      <Modal {...props}>
+      <Modal show={show} onHide={Hide}>
         <Modal.Body>
 <div className='form-group'>
     <Form onSubmit={handleOnSubmit}>
@@ -43,7 +55,7 @@ export default function RegForm(props) {
       <Form.Group controlId="formBasicEmail">
         <Form.Control 
         onChange={handleOnChange} 
-        value={state.email}
+        value={userData.email}
         name="email" 
         type="email" 
         placeholder="Email" 
@@ -52,7 +64,7 @@ export default function RegForm(props) {
       <Form.Group controlId="formBasicPassword">
         <Form.Control 
         onChange={handleOnChange} 
-        value={state.password}
+        value={userData.password}
         name="password"
         type="password" 
         placeholder="Password" 
@@ -61,7 +73,7 @@ export default function RegForm(props) {
         <Form.Group controlId="formBasicName">
         <Form.Control
         onChange={handleOnChange} 
-        value={state.fullname} 
+        value={userData.fullname} 
         name="fullname"
         type="text" 
         placeholder="Full Name" 
@@ -69,8 +81,8 @@ export default function RegForm(props) {
       </Form.Group>
       <div>
 
-      <Button variant="danger" onClick={props.onLogin} type='submit'>Register</Button>
-      <Button className='reg' onClick={props.onLogin}>Already have an account ? Klik Here</Button>
+      <Button variant="danger" type='submit'>Register</Button>
+      <p style={{fontSize: "11pt", margin: "8px 0 0"}}>Already have an account ? Click <span className='btn text-info' style={{border: "none", padding: "0"}} onClick={() => {setModalRegisterShow(false); setModalLoginShow(true)}}>here</span></p>
       </div>
     </Form>
 </div>
@@ -79,3 +91,5 @@ export default function RegForm(props) {
     </>
   );
   }
+
+  export default Regform
