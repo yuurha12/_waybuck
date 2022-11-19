@@ -32,7 +32,6 @@ const LoginForm = ({show,Hide, setModalRegisterShow,setModalLoginShow}) => {
       } else {
         console.log(users)
       }
-      
     });
   }
 
