@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, Stack } from "react-bootstrap";
 import Products from "./Products";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoginForm from "./Login";
 import Regform from "./Register";
 
@@ -9,19 +9,15 @@ const Order = () => {
   const [modalRegisterShow, setModalRegisterShow] = useState(false);
   const [modalLoginShow, setModalLoginShow] = useState(false);
 
-  const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(null);
-
-  const reRenderProduct = () => {
+  const reRender = () => {
     setLoggedIn(!!localStorage.getItem("LOGIN_STATUS"));
   };
 
   useEffect(() => {
-    reRenderProduct();
+    reRender();
   }, []);
-
-  <LoginForm reRenderProduct={reRenderProduct} />;
 
   return (
     <Stack
@@ -54,7 +50,7 @@ const Order = () => {
               </Card.Body>
             </Link>
           ) : (
-            <div onClick={setModalLoginShow}>
+            <div style={{cursor:"pointer"}} onClick={setModalLoginShow}>
               <Card.Img variant="top" src={item.image} />
               <Card.Body>
                 <Card.Title style={{ color: "#BD0707", fontSize: "18px" }}>
@@ -69,6 +65,7 @@ const Order = () => {
         </Card>
       ))}
       <LoginForm
+        reRender={reRender}
         show={modalLoginShow}
         Hide={() => setModalLoginShow(false)}
         setModalLoginShow={setModalLoginShow}

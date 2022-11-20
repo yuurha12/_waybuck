@@ -15,7 +15,7 @@ function Detail() {
         </Col>
         <Col>
           <h1 className="nameProd">{Products[id].name}</h1>
-          <h7 className="hargaProd">Rp.{Products[id].price}</h7>
+          <h6 className="hargaProd">Rp.{Products[id].price}</h6>
           <h4 className="topp">Topping</h4>
           <div className="topping">
             {Topping.map((item) => (

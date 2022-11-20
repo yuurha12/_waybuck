@@ -2,7 +2,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import React, { useState } from 'react';
 //register route
 
-const LoginForm = ({reRenderProduct, reRenderLogin, show,Hide, setModalRegisterShow,setModalLoginShow}) => {
+const LoginForm = ({reRender, show,Hide, setModalRegisterShow,setModalLoginShow}) => {
 
   const users = []
   
@@ -21,7 +21,7 @@ const LoginForm = ({reRenderProduct, reRenderLogin, show,Hide, setModalRegisterS
   }
   
   let storage = JSON.parse(localStorage.getItem("DATA_USER"))
-  
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     storage.forEach(element => {
@@ -29,8 +29,9 @@ const LoginForm = ({reRenderProduct, reRenderLogin, show,Hide, setModalRegisterS
         users.push(userLogin)
         localStorage.setItem("LOGIN_STATUS", JSON.stringify(users))
         setModalLoginShow(false)
-        reRenderLogin()
-        reRenderProduct()
+        reRender()
+        window.location.reload(true)
+        
       } else {
         console.log(users)
       }
@@ -61,7 +62,7 @@ const LoginForm = ({reRenderProduct, reRenderLogin, show,Hide, setModalRegisterS
         />
       </Form.Group>
       <Button variant="danger" type='submit'>Login</Button>{' '}
-      <p style={{fontSize: "11pt", margin: "8px 0 0"}}>Don't have an account ? Click <span className='btn text-info' style={{border: "none", padding: "0"}} onClick={() => {setModalRegisterShow(true); setModalLoginShow(false)}}>here</span></p>
+      <p style={{fontSize: "11pt", margin: "8px 0 0", textAlign:"center" }}>Don't have an account ? Click <span className='btn text-info' style={{border: "none", padding: "0"}} onClick={() => {setModalRegisterShow(true); setModalLoginShow(false)}}>here</span></p>
     </Form>
 </div>
         </Modal.Body>

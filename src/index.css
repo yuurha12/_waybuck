@@ -75,6 +75,10 @@ a {
   color: #bd0707;
 }
 
+.Cart img {
+  margin-right: 36px;
+}
+
 .form-control {
   margin-top: 20px;
   width: 350px;
@@ -282,10 +286,6 @@ h5 {
   left: 620px;
   border-radius: 0px 10px 10px 0px;
   margin-top: 20px;
-}
-
-.Ava img {
-  margin-right: 36px;
 }
 
 .dropdown-menu {

@@ -82,7 +82,7 @@ const Regform = ({show,Hide, setModalRegisterShow,setModalLoginShow}) => {
       <div>
 
       <Button variant="danger" type='submit'>Register</Button>
-      <p style={{fontSize: "11pt", margin: "8px 0 0"}}>Already have an account ? Click <span className='btn text-info' style={{border: "none", padding: "0"}} onClick={() => {setModalRegisterShow(false); setModalLoginShow(true)}}>here</span></p>
+      <p style={{fontSize: "11pt", margin: "8px 0 0", textAlign:"center"}}>Already have an account ? Click <span className='btn text-info' style={{border: "none", padding: "0"}} onClick={() => {setModalRegisterShow(false); setModalLoginShow(true)}}>here</span></p>
       </div>
     </Form>
 </div>

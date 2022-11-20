@@ -13,9 +13,8 @@ import { useNavigate, Link } from "react-router-dom";
 
 //icon
 import Cart from "../assets/images/icon/shopping-basket.svg";
-import userAvatar from "../assets/images/icon/usericon.png";
-import Ava from "../assets/images/icon/user.svg";
-import Order from "./Order";
+import userIcon from "../assets/images/icon/usericon.png";
+import userAvatar from "../assets/images/icon/user.svg";
 //page
 
 const NavBar = () => {
@@ -27,24 +26,23 @@ const NavBar = () => {
   // const data = JSON.parse(localData);
   // let dataLogin = [...data];
 
-  
   const navigate = useNavigate();
-  
+
   const profile = () => {
     navigate("/profile");
   };
-  
-  const userAva = <Image src={userAvatar} alt="" roundedCircle />;
-  
+
+  const userAva = <Image src={userIcon} alt="" roundedCircle />;
+
   const [loggedIn, setLoggedIn] = useState(null);
-  
-  const reRenderLogin = () => {
+
+  const reRender = () => {
     setLoggedIn(!!localStorage.getItem("LOGIN_STATUS"));
   };
   useEffect(() => {
-    reRenderLogin();
+    reRender();
   }, []);
-  
+
   const logout = function () {
     localStorage.removeItem("LOGIN_STATUS");
     setLoggedIn(false);
@@ -75,7 +73,7 @@ const NavBar = () => {
                     Login
                   </Button>
                   <LoginForm
-                    reRenderLogin={reRenderLogin}
+                    reRender={reRender}
                     show={modalLoginShow}
                     Hide={() => setModalLoginShow(false)}
                     setModalLoginShow={setModalLoginShow}
@@ -98,19 +96,19 @@ const NavBar = () => {
               </Nav>
             ) : (
               <>
-                <Nav className="Ava">
+                <Nav className="Cart">
                   <Link to={"/payment"}>
                     <img src={Cart} alt="" />
                   </Link>
                 </Nav>
                 <NavDropdown title={userAva} id="basic-nav-dropdown">
                   <NavDropdown.Item onClick={profile}>
-                    <img src={Ava} alt="" />
+                    <img src={userAvatar} alt="" />
                     Profile
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={logout}>
-                    <img src={Ava} alt="" />
+                    <img src={userAvatar} alt="" />
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
