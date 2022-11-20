@@ -3,28 +3,25 @@ import { Card, Stack } from "react-bootstrap";
 import Products from "./Products";
 import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "./Login";
+import Regform from "./Register";
 
 const Order = () => {
+  const [modalRegisterShow, setModalRegisterShow] = useState(false);
+  const [modalLoginShow, setModalLoginShow] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  
-  const [loggedIn, setLoggedIn] = useState(null)
-  const logout = function(){
-    localStorage.removeItem('LOGIN_STATUS')
-    setLoggedIn(false);
-    navigate("/")
- 
-  }
+  const [loggedIn, setLoggedIn] = useState(null);
 
-  useEffect(() => {
-    reRenderLogin();
-  }, []);
-
-
-  const reRenderLogin = () => {
+  const reRenderProduct = () => {
     setLoggedIn(!!localStorage.getItem("LOGIN_STATUS"));
   };
+
+  useEffect(() => {
+    reRenderProduct();
+  }, []);
+
+  <LoginForm reRenderProduct={reRenderProduct} />;
 
   return (
     <Stack
@@ -44,32 +41,45 @@ const Order = () => {
             border: "none",
           }}
         >
-          {loggedIn !== false ?
-          (<Link to={`/product-detail/${item.id}`}>
-            <Card.Img variant="top" src={item.image} />
-            <Card.Body>
-              <Card.Title style={{ color: "#BD0707", fontSize: "18px" }}>
-                <b> {item.name}</b>
-              </Card.Title>
-              <Card.Text style={{ fontSize: "14px" }}>
-                Rp. {item.price}
-              </Card.Text>
-            </Card.Body>
-          </Link>)
-          :
-          (<Link to={"/"}>
-          <Card.Img variant="top" src={item.image} />
-          <Card.Body>
-            <Card.Title style={{ color: "#BD0707", fontSize: "18px" }}>
-              <b> {item.name}</b>
-            </Card.Title>
-            <Card.Text style={{ fontSize: "14px" }}>
-              Rp. {item.price}
-            </Card.Text>
-          </Card.Body>
-        </Link>)}
+          {loggedIn ? (
+            <Link to={`/product-detail/${item.id}`}>
+              <Card.Img variant="top" src={item.image} />
+              <Card.Body>
+                <Card.Title style={{ color: "#BD0707", fontSize: "18px" }}>
+                  <b> {item.name}</b>
+                </Card.Title>
+                <Card.Text style={{ fontSize: "14px" }}>
+                  Rp. {item.price}
+                </Card.Text>
+              </Card.Body>
+            </Link>
+          ) : (
+            <div onClick={setModalLoginShow}>
+              <Card.Img variant="top" src={item.image} />
+              <Card.Body>
+                <Card.Title style={{ color: "#BD0707", fontSize: "18px" }}>
+                  <b> {item.name}</b>
+                </Card.Title>
+                <Card.Text style={{ fontSize: "14px" }}>
+                  Rp. {item.price}
+                </Card.Text>
+              </Card.Body>
+            </div>
+          )}
         </Card>
       ))}
+      <LoginForm
+        show={modalLoginShow}
+        Hide={() => setModalLoginShow(false)}
+        setModalLoginShow={setModalLoginShow}
+        setModalRegisterShow={setModalRegisterShow}
+      />
+      <Regform
+        show={modalRegisterShow}
+        Hide={() => setModalRegisterShow(false)}
+        setModalLoginShow={setModalLoginShow}
+        setModalRegisterShow={setModalRegisterShow}
+      />
     </Stack>
   );
 };

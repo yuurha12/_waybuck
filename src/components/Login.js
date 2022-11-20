@@ -2,10 +2,11 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import React, { useState } from 'react';
 //register route
 
-const LoginForm = ({reRenderLogin, show,Hide, setModalRegisterShow,setModalLoginShow}) => {
+const LoginForm = ({reRenderProduct, reRenderLogin, show,Hide, setModalRegisterShow,setModalLoginShow}) => {
 
   const users = []
   
+
   const [userLogin, setState] = useState({
     email: "",
     password: "",
@@ -29,12 +30,12 @@ const LoginForm = ({reRenderLogin, show,Hide, setModalRegisterShow,setModalLogin
         localStorage.setItem("LOGIN_STATUS", JSON.stringify(users))
         setModalLoginShow(false)
         reRenderLogin()
+        reRenderProduct()
       } else {
         console.log(users)
       }
     });
   }
-
 
   return (
     <>

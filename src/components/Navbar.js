@@ -15,6 +15,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Cart from "../assets/images/icon/shopping-basket.svg";
 import userAvatar from "../assets/images/icon/usericon.png";
 import Ava from "../assets/images/icon/user.svg";
+import Order from "./Order";
 //page
 
 const NavBar = () => {
@@ -26,35 +27,28 @@ const NavBar = () => {
   // const data = JSON.parse(localData);
   // let dataLogin = [...data];
 
-  useEffect(() => {
-    reRenderLogin();
-  }, []);
-
+  
   const navigate = useNavigate();
-
-  //Logout
-  // const logout = () => {
-  //   dataLogin.pop();
-  //   const parsed = JSON.stringify(dataLogin);
-  //   localStorage.setItem("LOGIN_STATUS", parsed);
-  //   navigate("/");
-  // };
-
+  
   const profile = () => {
     navigate("/profile");
   };
-
+  
   const userAva = <Image src={userAvatar} alt="" roundedCircle />;
-
+  
   const [loggedIn, setLoggedIn] = useState(null);
+  
+  const reRenderLogin = () => {
+    setLoggedIn(!!localStorage.getItem("LOGIN_STATUS"));
+  };
+  useEffect(() => {
+    reRenderLogin();
+  }, []);
+  
   const logout = function () {
     localStorage.removeItem("LOGIN_STATUS");
     setLoggedIn(false);
     navigate("/");
-  };
-
-  const reRenderLogin = () => {
-    setLoggedIn(!!localStorage.getItem("LOGIN_STATUS"));
   };
 
   return (
@@ -105,7 +99,9 @@ const NavBar = () => {
             ) : (
               <>
                 <Nav className="Ava">
-                  <img src={Cart} alt="" />
+                  <Link to={"/payment"}>
+                    <img src={Cart} alt="" />
+                  </Link>
                 </Nav>
                 <NavDropdown title={userAva} id="basic-nav-dropdown">
                   <NavDropdown.Item onClick={profile}>
