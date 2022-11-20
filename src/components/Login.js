@@ -1,9 +1,8 @@
 import { Button, Form, Modal } from 'react-bootstrap';
 import React, { useState } from 'react';
-
 //register route
 
-const LoginForm = ({show,Hide, setModalRegisterShow,setModalLoginShow}) => {
+const LoginForm = ({reRenderLogin, show,Hide, setModalRegisterShow,setModalLoginShow}) => {
 
   const users = []
   
@@ -29,6 +28,7 @@ const LoginForm = ({show,Hide, setModalRegisterShow,setModalLoginShow}) => {
         users.push(userLogin)
         localStorage.setItem("LOGIN_STATUS", JSON.stringify(users))
         setModalLoginShow(false)
+        reRenderLogin()
       } else {
         console.log(users)
       }

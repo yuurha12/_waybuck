@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Stack } from "react-bootstrap";
 import Products from "./Products";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import LoginForm from "./Login";
 
 const Order = () => {
+
+  const navigate = useNavigate()
+
+  
+  const [loggedIn, setLoggedIn] = useState(null)
+  const logout = function(){
+    localStorage.removeItem('LOGIN_STATUS')
+    setLoggedIn(false);
+    navigate("/")
+ 
+  }
+
+  useEffect(() => {
+    reRenderLogin();
+  }, []);
+
+
+  const reRenderLogin = () => {
+    setLoggedIn(!!localStorage.getItem("LOGIN_STATUS"));
+  };
+
   return (
     <Stack
       direction="horizontal"
@@ -22,7 +44,8 @@ const Order = () => {
             border: "none",
           }}
         >
-          <Link to={`/product-detail/${item.id}`}>
+          {loggedIn !== false ?
+          (<Link to={`/product-detail/${item.id}`}>
             <Card.Img variant="top" src={item.image} />
             <Card.Body>
               <Card.Title style={{ color: "#BD0707", fontSize: "18px" }}>
@@ -32,7 +55,19 @@ const Order = () => {
                 Rp. {item.price}
               </Card.Text>
             </Card.Body>
-          </Link>
+          </Link>)
+          :
+          (<Link to={"/"}>
+          <Card.Img variant="top" src={item.image} />
+          <Card.Body>
+            <Card.Title style={{ color: "#BD0707", fontSize: "18px" }}>
+              <b> {item.name}</b>
+            </Card.Title>
+            <Card.Text style={{ fontSize: "14px" }}>
+              Rp. {item.price}
+            </Card.Text>
+          </Card.Body>
+        </Link>)}
         </Card>
       ))}
     </Stack>

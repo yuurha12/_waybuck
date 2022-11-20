@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Nav,
@@ -26,30 +26,36 @@ const NavBar = () => {
   // const data = JSON.parse(localData);
   // let dataLogin = [...data];
 
-  
+  useEffect(() => {
+    reRenderLogin();
+  }, []);
+
   const navigate = useNavigate();
-  
+
   //Logout
   // const logout = () => {
-    //   dataLogin.pop();
-    //   const parsed = JSON.stringify(dataLogin);
-    //   localStorage.setItem("LOGIN_STATUS", parsed);
-    //   navigate("/");
-    // };
-    
-    const profile = () => {
-      navigate("/profile");
-    };
-    
-    const userAva = <Image src={userAvatar} alt="" roundedCircle />;
+  //   dataLogin.pop();
+  //   const parsed = JSON.stringify(dataLogin);
+  //   localStorage.setItem("LOGIN_STATUS", parsed);
+  //   navigate("/");
+  // };
 
-    const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('LOGIN_STATUS'))
-      const logout = function(){
-          localStorage.removeItem('LOGIN_STATUS')
-          setLoggedIn(false);
-          navigate("/")
-      }
+  const profile = () => {
+    navigate("/profile");
+  };
 
+  const userAva = <Image src={userAvatar} alt="" roundedCircle />;
+
+  const [loggedIn, setLoggedIn] = useState(null);
+  const logout = function () {
+    localStorage.removeItem("LOGIN_STATUS");
+    setLoggedIn(false);
+    navigate("/");
+  };
+
+  const reRenderLogin = () => {
+    setLoggedIn(!!localStorage.getItem("LOGIN_STATUS"));
+  };
 
   return (
     <>
@@ -64,7 +70,7 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
-            {loggedIn !== true ?(
+            {loggedIn !== true ? (
               <Nav className="form-relog">
                 <>
                   <Button
@@ -75,6 +81,7 @@ const NavBar = () => {
                     Login
                   </Button>
                   <LoginForm
+                    reRenderLogin={reRenderLogin}
                     show={modalLoginShow}
                     Hide={() => setModalLoginShow(false)}
                     setModalLoginShow={setModalLoginShow}
