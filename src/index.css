@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 0 !important;
 }
 
 a {
@@ -15,6 +15,15 @@ a {
 
   background: #bd0707;
   border-radius: 10px;
+}
+
+.bayar {
+  position: relative;
+  top: 120px;
+  background-color: #bd0707;
+  color: white;
+  width: 100% !important;
+  height: 40px !important;
 }
 
 .brand {
@@ -82,6 +91,17 @@ a {
   color: #bd0707;
 }
 
+.hargaProd {
+  width: 110px;
+  height: 33px;
+  left: 685px;
+  top: 246px;
+
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 75px;
+}
+
 .jumbo {
   padding-top: 77px;
 }
@@ -95,6 +115,10 @@ a {
   align-content: center;
   --bs-modal-padding: 33px;
   --bs-modal-width: 416px;
+}
+
+.nameProd {
+  color: #bd0707;
 }
 
 .Order {
@@ -147,6 +171,23 @@ h5 {
   --bs-btn-hover-color: unset;
 }
 
+.rego {
+  position: relative;
+  top: 59px;
+  left: 390px;
+  color: #974a4a;
+}
+
+.setuju {
+  width: 20px;
+  height: 20px;
+}
+
+.sukses {
+  width: 20px;
+  height: 20px;
+}
+
 .text-hero {
   margin-top: 45px;
   margin-left: 42px;
@@ -195,6 +236,43 @@ h5 {
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
+}
+
+.topp {
+  position: relative;
+  width: 77px;
+  height: 33px;
+  font-weight: 800;
+  font-size: 24px;
+  top: 74px;
+  color: #974a4a;
+}
+
+.topping {
+  position: relative;
+  top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.topping img {
+  width: 75px;
+  height: 85px;
+  left: 707px;
+  top: 408px;
+  border-radius: 60px;
+}
+
+.total {
+  display: flex;
+  position: relative;
+  top: 59px;
+  color: #974a4a;
+}
+
+.totalrego {
+  display: flex;
 }
 
 .jumbo2 {
