@@ -9,25 +9,25 @@ const Products = [
     id: 0,
     image: prod1,
     price: 27000,
-    name: "Ice Coffee Palm Sugar",
+    title: "Ice Coffee Palm Sugar",
   },
   {
     id: 1,
     image: prod2,
     price: 31000,
-    name: "Ice Coffee Green Tea",
+    title: "Ice Coffee Green Tea",
   },
   {
     id: 2,
     image: prod3,
     price: 29000,
-    name: "Hanami Latte",
+    title: "Hanami Latte",
   },
   {
     id: 3,
     image: prod4,
     price: 28000,
-    name: "Clepon Coffe",
+    title: "Clepon Coffe",
   },
 ];
 

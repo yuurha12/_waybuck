@@ -1,23 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Card, Stack } from "react-bootstrap";
 import Products from "./Products";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "./Login";
 import Regform from "./Register";
+import { AppContexts } from "./contexts/AppContexts";
 
 const Order = () => {
+  const contexts = useContext(AppContexts)
+
   const [modalRegisterShow, setModalRegisterShow] = useState(false);
   const [modalLoginShow, setModalLoginShow] = useState(false);
 
+  const [state, dispatch] = useContext(AppContexts)
 
-  const [loggedIn, setLoggedIn] = useState(null);
-  const reRender = () => {
-    setLoggedIn(!!localStorage.getItem("LOGIN_STATUS"));
+    let navigate = useNavigate()
+
+    const logout = () => {
+        console.log(state)
+        dispatch({
+            type: "LOGOUT"
+        })
+        navigate("/")
+    }
+  const profile = () => {
+    navigate("/profile");
+    
+
   };
-
-  useEffect(() => {
-    reRender();
-  }, []);
 
   return (
     <Stack
@@ -37,7 +47,7 @@ const Order = () => {
             border: "none",
           }}
         >
-          {loggedIn ? (
+          {contexts.AppContextsValue ? (
             <Link to={`/product-detail/${item.id}`}>
               <Card.Img variant="top" src={item.image} />
               <Card.Body>
@@ -54,7 +64,7 @@ const Order = () => {
               <Card.Img variant="top" src={item.image} />
               <Card.Body>
                 <Card.Title style={{ color: "#BD0707", fontSize: "18px" }}>
-                  <b> {item.name}</b>
+                  <b> {item.title}</b>
                 </Card.Title>
                 <Card.Text style={{ fontSize: "14px" }}>
                   Rp. {item.price}
@@ -65,17 +75,8 @@ const Order = () => {
         </Card>
       ))}
       <LoginForm
-        reRender={reRender}
-        show={modalLoginShow}
-        Hide={() => setModalLoginShow(false)}
-        setModalLoginShow={setModalLoginShow}
-        setModalRegisterShow={setModalRegisterShow}
       />
       <Regform
-        show={modalRegisterShow}
-        Hide={() => setModalRegisterShow(false)}
-        setModalLoginShow={setModalLoginShow}
-        setModalRegisterShow={setModalRegisterShow}
       />
     </Stack>
   );

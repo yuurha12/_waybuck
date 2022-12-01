@@ -1,53 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import {
   Container,
   Nav,
   Navbar,
   Button,
-  NavDropdown,
-  Image,
 } from "react-bootstrap";
-import LoginForm from "./Login";
-import RegForm from "./Register";
-import { useNavigate, Link } from "react-router-dom";
+import LoginForm from "./auth/Login";
+import RegForm from "./auth/Register";
+import { Link } from "react-router-dom";
+// import { API } from "../config/api";
 
 //icon
-import Cart from "../assets/images/icon/shopping-basket.svg";
-import userIcon from "../assets/images/icon/usericon.png";
-import userAvatar from "../assets/images/icon/user.svg";
-//page
 
-const NavBar = () => {
+import { AppContexts } from "./contexts/AppContexts";
+//page
+import ModalAuth from "./modal/auth";
+
+const NavBar = ({show, setShow}) => {
+
+  const contexts = useContext(AppContexts)
+
   const [modalRegisterShow, setModalRegisterShow] = useState(false);
   const [modalLoginShow, setModalLoginShow] = useState(false);
 
-  //Login
-  // const localData = localStorage.getItem("LOGIN_STATUS");
-  // const data = JSON.parse(localData);
-  // let dataLogin = [...data];
+  const [state] = useContext(AppContexts);
+  const isLogin = state.isLogin;
 
-  const navigate = useNavigate();
-
-  const profile = () => {
-    navigate("/profile");
-  };
-
-  const userAva = <Image src={userIcon} alt="" roundedCircle />;
-
-  const [loggedIn, setLoggedIn] = useState(null);
-
-  const reRender = () => {
-    setLoggedIn(!!localStorage.getItem("LOGIN_STATUS"));
-  };
-  useEffect(() => {
-    reRender();
-  }, []);
-
-  const logout = function () {
-    localStorage.removeItem("LOGIN_STATUS");
-    setLoggedIn(false);
-    navigate("/");
-  };
 
   return (
     <>
@@ -62,57 +40,35 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
-            {loggedIn !== true ? (
+            {isLogin !== true? (
               <Nav className="form-relog">
                 <>
                   <Button
                     className="btn-login"
                     variant="primary"
-                    onClick={() => setModalLoginShow(true)}
-                  >
-                    Login
-                  </Button>
+                    onClick={() => setModalLoginShow(true)}>Login</Button>
                   <LoginForm
-                    reRender={reRender}
-                    show={modalLoginShow}
-                    Hide={() => setModalLoginShow(false)}
-                    setModalLoginShow={setModalLoginShow}
-                    setModalRegisterShow={setModalRegisterShow}
-                  />
+                 show={modalLoginShow}
+                 hide={() => setModalLoginShow(false)}
+                 setModalLoginShow={contexts.showContextsetModalLoginShow}
+                 setModalRegisterShow={setModalRegisterShow}
+                   />
                   <Button
                     className="btn-reg"
                     variant="primary"
-                    onClick={() => setModalRegisterShow(true)}
-                  >
-                    Register
-                  </Button>
+                    onClick={() => setModalRegisterShow(true)}>Register</Button>
                   <RegForm
                     show={modalRegisterShow}
-                    Hide={() => setModalRegisterShow(false)}
+                    hide={() => setModalRegisterShow(false)}
                     setModalLoginShow={setModalLoginShow}
                     setModalRegisterShow={setModalRegisterShow}
                   />
                 </>
               </Nav>
             ) : (
-              <>
-                <Nav className="Cart">
-                  <Link to={"/payment"}>
-                    <img src={Cart} alt="" />
-                  </Link>
-                </Nav>
-                <NavDropdown title={userAva} id="basic-nav-dropdown">
-                  <NavDropdown.Item onClick={profile}>
-                    <img src={userAvatar} alt="" />
-                    Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={logout}>
-                    <img src={userAvatar} alt="" />
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </>
+              <div className="navbarLeft">
+          <ModalAuth show={show} setShow={setShow} />
+        </div>
             )}
           </Navbar.Collapse>
         </Container>

@@ -3,9 +3,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Waysbucks from "../components/Hero";
 import Order from "../components/Order";
 import { Container, Row, Col } from "react-bootstrap";
+import NavBar from "../components/Navbar";
 
 export default function Home() {
   return (
+    <div>
+      <NavBar />
     <Container>
       <Waysbucks />
       <Row>
@@ -15,5 +18,6 @@ export default function Home() {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 }

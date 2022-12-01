@@ -1,11 +1,13 @@
 import { Button, Form, Modal } from 'react-bootstrap';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 //register route
 
-const LoginForm = ({reRender, show,Hide, setModalRegisterShow,setModalLoginShow}) => {
+const LoginForm = ({reRender, show,Hide, setModalRegisterShow,setModalLoginShow, setIsLogin}) => {
 
   const users = []
   
+  const navigate = useNavigate()
 
   const [userLogin, setState] = useState({
     email: "",
@@ -30,7 +32,6 @@ const LoginForm = ({reRender, show,Hide, setModalRegisterShow,setModalLoginShow}
         localStorage.setItem("LOGIN_STATUS", JSON.stringify(users))
         setModalLoginShow(false)
         reRender()
-        window.location.reload(true)
         
       } else {
         console.log(users)

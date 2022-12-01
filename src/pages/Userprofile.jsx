@@ -13,7 +13,7 @@ const Profile = () => {
             <div>
                 <Container>
                 <Row>
-                    <Col>
+                    <Col className="profil">
                     <p>My Profile</p>
                     <Stack direction="horizontal" gap={4}>
                     <div>
@@ -21,14 +21,14 @@ const Profile = () => {
                     </div>
                     <div className="align-self-start">
                     <p className="fw-bold my-0" style={{color: "#613D2B"}}>Full Name</p>
-                    <p className="mb-4">Egi Ganteng</p>
+                    <p className="mb-4">Jojo</p>
                     <p className="fw-bold my-0" style={{color: "#613D2B"}}>Email</p>
-                    <p className="mb-4">egigans@gmail.com</p>
+                    <p className="mb-4">Jojo@stardust.com</p>
                     </div>
                     </Stack>
                     </Col>
 
-                    <Col>
+                    <Col className="transaction">
                     <p>My Transaction</p>
                     <Stack direction="horizontal" gap={4} style={{backgroundColor: "#F7DADA", borderRadius: "10px"}}>
                             <div>

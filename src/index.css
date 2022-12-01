@@ -64,7 +64,7 @@ a {
 
 .card-body {
   padding: 33px;
-  background-color: #f7dada;
+  /* background-color: #f7dada; */
 }
 
 .card-body h1 {
@@ -77,6 +77,13 @@ a {
 
 .Cart img {
   margin-right: 36px;
+}
+
+.counter {
+  border-radius: 50px;
+  position: relative;
+  right: 52px;
+  bottom: 5px;
 }
 
 .form-control {
@@ -93,6 +100,14 @@ a {
 
 .form-group h1 {
   color: #bd0707;
+}
+
+.formProduct .form-control {
+  width: 500px;
+  height: 50px;
+  background: rgba(224, 200, 200, 0.25);
+  border: 2px solid #bd0707;
+  border-radius: 5px;
 }
 
 .hargaProd {
@@ -164,6 +179,11 @@ h5 {
   --bs-btn-hover-color: unset;
 }
 
+.profil {
+  position: relative;
+  left: 120px;
+}
+
 .reg {
   --bs-btn-color: black;
   width: fit-content;
@@ -196,6 +216,11 @@ h5 {
   margin-top: 45px;
   margin-left: 42px;
   color: white;
+}
+
+.transaction {
+  position: relative;
+  left: 350px;
 }
 
 .t1 {
@@ -281,7 +306,7 @@ h5 {
 
 .jumbo2 {
   position: absolute;
-  width: 451px;
+  width: 451px !important;
   height: 324px;
   left: 620px;
   border-radius: 0px 10px 10px 0px;
