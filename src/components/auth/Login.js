@@ -9,8 +9,7 @@ import { API } from '../../config/api';
 const LoginForm = ({show,hide,setModalLoginShow, setModalRegisterShow}) => {  
   let navigate = useNavigate();
 
-  const title = 'Login';
-  document.title = 'Waysbucks | ' + title;
+  document.title = 'Waysbucks | Home';
 
   const [state, dispatch] = useContext(AppContexts);
 

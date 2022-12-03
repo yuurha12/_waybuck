@@ -33,7 +33,9 @@ export default function ModalAuth() {
                 <nav className="Cart">
                   <Link to={"/payment"}>
                     <img src={Cart} alt="" />
-                      <Badge className="counter" bg="danger">9</Badge>
+                      <Badge className="counter" bg="danger">
+                        
+                      </Badge>
                   </Link>
                 </nav>
                 <NavDropdown title={userAva} id="basic-nav-dropdown">

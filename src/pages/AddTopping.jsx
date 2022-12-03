@@ -1,77 +1,35 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
-import NavBar from "../components/navbar/Navbar";
-import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { API } from "../config/api";
+import { useMutation } from "react-query";
+import Navbar from "../components/navbar/Navbar";
 import paperClip from "../assets/images/icon/paperclip.svg";
 
-//api
-import { API } from "../config/api";
 
-const style = {
-  textTitle: {
-    fontWeight: "600",
-    fontSize: "32px",
-    lineHeight: "49px",
 
-    color: "#BD0707",
-  },
 
-  textRed: {
-    color: "#BD0707",
-  },
 
-  bgColor: {
-    backgroundColor: "#BD0707",
-  },
-
-  textCenter: {
-    textAlign: "center",
-  },
-
-  link: {
-    fontWeight: "bold",
-    textDecoration: "none",
-    color: "black",
-  },
-
-  ImgProduct: {
-    position: "relative",
-    width: "350px",
-  },
-
-  // Image Product 1
-  ImgLogo: {
-    position: "absolute",
-    width: "130px",
-    height: "auto",
-    top: "35%",
-    left: "77%",
-  },
-};
-
-export default function AddProduct() {
-  const title = "Add Product";
+export default function AddToping() {
+  const title = "Add Topping";
   document.title = "Waysbucks | " + title;
 
-  const [previewName, setPreviewName] = useState(""); //name
-  const [preview, setPreview] = useState(null); //image
+  const [preview, setPreview] = useState(null);
+  const [previewName, setPreviewName] = useState("");
 
-  const [form, setForm] = useState({
+  const [form, setform] = useState({
     image: "",
     title: "",
     price: "",
-  }); //Store data product
+  });
 
-  //handle chahnge data on from
   const handleChange = (e) => {
-    setForm({
+    setform({
       ...form,
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
     });
 
-    // Create image url for preview
     if (e.target.type === "file") {
       let url = URL.createObjectURL(e.target.files[0]);
       setPreview(url);
@@ -85,7 +43,6 @@ export default function AddProduct() {
     try {
       e.preventDefault();
 
-      // Configuration
       const config = {
         headers: {
           "Content-type": "multipart/form-data",
@@ -97,8 +54,7 @@ export default function AddProduct() {
       formData.set("title", form.title);
       formData.set("price", form.price);
 
-      // Insert category data
-      await API.post("/product", formData, config);
+      await API.post("/topping", formData, config);
 
       navigate("/");
     } catch (error) {
@@ -107,21 +63,20 @@ export default function AddProduct() {
   });
   return (
     <>
-      <NavBar />
+      <Navbar />
       <Container className="addProductContainer">
         <div className="addProductLeft">
           <form onSubmit={(e) => handleSubmit.mutate(e)}>
-            <h1>Product</h1>
+            <h1>Toping</h1>
             <input
               type="text"
-              placeholder="Name Product"
+              placeholder="Name Toping"
               name="title"
               onChange={handleChange}
             />
             <input
               type="number"
               placeholder="Price"
-              className="price"
               name="price"
               onChange={handleChange}
             />
@@ -129,7 +84,6 @@ export default function AddProduct() {
               type="file"
               id="addProductImage"
               hidden
-              className="photoProduct"
               name="image"
               onChange={handleChange}
             />
@@ -137,10 +91,10 @@ export default function AddProduct() {
               htmlFor="addProductImage"
               className={previewName === "" ? "addProductImage" : "previewName"}
             >
-              {previewName === "" ? "Photo Product" : previewName}
+              {previewName === "" ? "Photo Toping" : previewName}
               <img src={paperClip} alt="paperClip" />
             </label>
-            <button>Add Product</button>
+            <button>Add Toping</button>
           </form>
         </div>
         {preview && (

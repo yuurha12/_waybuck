@@ -3,6 +3,7 @@ import { Container, Button, Table, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Approve from "../assets/images/icon/Approve.png";
 import Cancel from "../assets/images/icon/Cancel.png";
+import NavBar from "../components/navbar/Navbar";
 
 const style = {
   textTitle: {
@@ -44,7 +45,9 @@ const style = {
 };
 
 function Income() {
-    return (
+  return (
+    <div>
+      <NavBar />
       <Container className="mt-5">
         <h3 style={style.textTitle} className="mb-5">
           Income transaction
@@ -108,7 +111,7 @@ function Income() {
               </td>
               <td style={style.success}>Success</td>
               <td className="d-flex justify-content-center">
-                <img alt="" src={Approve} className="sukses"/>
+                <img alt="" src={Approve} className="sukses" />
               </td>
             </tr>
             <tr>
@@ -144,7 +147,8 @@ function Income() {
           </tbody>
         </Table>
       </Container>
-    );
-  }
-  
-  export default Income;
+    </div>
+  );
+}
+
+export default Income;

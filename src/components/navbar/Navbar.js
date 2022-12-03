@@ -1,24 +1,20 @@
 import React, { useContext, useState } from "react";
-import {
-  Container,
-  Nav,
-  Navbar,
-  Button,
-} from "react-bootstrap";
-import LoginForm from "./auth/Login";
-import RegForm from "./auth/Register";
+import { Container, Nav, Navbar, Button } from "react-bootstrap";
+import LoginForm from "../auth/Login";
+import RegForm from "../auth/Register";
 import { Link } from "react-router-dom";
+
 // import { API } from "../config/api";
 
 //icon
 
-import { AppContexts } from "./contexts/AppContexts";
+import { AppContexts } from "../contexts/AppContexts";
 //page
-import ModalAuth from "./modal/auth";
+import ModalAuth from "../modal/auth";
+import NavBarAdmin from "./NavbarAdmin";
 
-const NavBar = ({show, setShow}) => {
-
-  const contexts = useContext(AppContexts)
+const NavBar = ({ show, setShow }) => {
+  const contexts = useContext(AppContexts);
 
   const [modalRegisterShow, setModalRegisterShow] = useState(false);
   const [modalLoginShow, setModalLoginShow] = useState(false);
@@ -26,37 +22,49 @@ const NavBar = ({show, setShow}) => {
   const [state] = useContext(AppContexts);
   const isLogin = state.isLogin;
 
+  let redirect = null
+  if (state.user.role === "admin") {
+    redirect = '/income-transaction'
+  }else{
+    redirect = '/'
+  }
 
   return (
     <>
       <Navbar className="nav-bg" bg="light" variant="light">
         <Container>
-          <Link to={"/"}>
+          <Link to={redirect}>
             <Navbar.Brand className="brand">
               {" "}
-              <img src={require("../assets/images/icon/Group.png")} alt="" />
+              <img src={require("../../assets/images/icon/Group.png")} alt="" />
             </Navbar.Brand>
           </Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
-            {isLogin !== true? (
+            {isLogin !== true ? (
               <Nav className="form-relog">
                 <>
                   <Button
                     className="btn-login"
                     variant="primary"
-                    onClick={() => setModalLoginShow(true)}>Login</Button>
+                    onClick={() => setModalLoginShow(true)}
+                  >
+                    Login
+                  </Button>
                   <LoginForm
-                 show={modalLoginShow}
-                 hide={() => setModalLoginShow(false)}
-                 setModalLoginShow={contexts.showContextsetModalLoginShow}
-                 setModalRegisterShow={setModalRegisterShow}
-                   />
+                    show={modalLoginShow}
+                    hide={() => setModalLoginShow(false)}
+                    setModalLoginShow={contexts.showContextsetModalLoginShow}
+                    setModalRegisterShow={setModalRegisterShow}
+                  />
                   <Button
                     className="btn-reg"
                     variant="primary"
-                    onClick={() => setModalRegisterShow(true)}>Register</Button>
+                    onClick={() => setModalRegisterShow(true)}
+                  >
+                    Register
+                  </Button>
                   <RegForm
                     show={modalRegisterShow}
                     hide={() => setModalRegisterShow(false)}
@@ -66,9 +74,13 @@ const NavBar = ({show, setShow}) => {
                 </>
               </Nav>
             ) : (
-              <div className="navbarLeft">
-          <ModalAuth show={show} setShow={setShow} />
-        </div>
+              <>
+                {state.user.role === "user" ? (
+                  <ModalAuth show={show} setShow={setShow} />
+                ) : (
+                  <NavBarAdmin />
+                )}
+              </>
             )}
           </Navbar.Collapse>
         </Container>

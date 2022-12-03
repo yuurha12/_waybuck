@@ -13,23 +13,32 @@ import Profile from "./pages/Userprofile";
 import Income from "./pages/incometransaction";
 import CartDigan from "./pages/Cart";
 import AddProduct from "./pages/AddProduct";
+import AddToping from './pages/AddTopping';
+
+//context
 import {AppContexts} from "./components/contexts/AppContexts";
-import LoginForm from './components/auth/Login';
+
+
 
 function App() {
   let navigate = useNavigate();
 
+  // Init user context 
   const [state, dispatch] = useContext(AppContexts);
-  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Redirect Auth
     if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-
-    if (state.isLogin === false && !isLoading) {
-      navigate(<LoginForm />);
+  setAuthToken(localStorage.token)
+}
+    // Redirect Auth
+    if (state.isLogin === false) {
+      navigate('/');
+    } else {
+      if (state.user.role === 'admin') {
+        navigate('/income-transaction');
+      } else if (state.user.role === 'user') {
+        navigate('/');
+      }
     }
   }, [state]);
 
@@ -44,8 +53,6 @@ function App() {
         });
       }
 
-      console.log("response check auth", response)
-
       // Get user data
       let payload = response.data.data;
       // Get token from local storage
@@ -56,11 +63,8 @@ function App() {
         type: 'USER_SUCCESS',
         payload,
       });
-      console.log("ini data state", state)
-      setIsLoading(false)
     } catch (error) {
       console.log(error);
-      setIsLoading(false)
     }
   };
 
@@ -69,8 +73,6 @@ function App() {
   }, []);
 
   return (
-    <>
-      {isLoading ? null :
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/product-detail/:id" element={<ProdDetail />} />
@@ -78,9 +80,8 @@ function App() {
         <Route exact path="/income-transaction" element={<Income />} />
         <Route exact path="/payment" element={<CartDigan />} />
         <Route exact path="/add-product" element={<AddProduct />} />
+        <Route exact path="/add-topping" element={<AddToping />} />
       </Routes>
-}
-    </>
   );
 }
 
