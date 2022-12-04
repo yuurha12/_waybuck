@@ -75,8 +75,8 @@ a {
   color: #bd0707;
 }
 
-.Cart img {
-  margin-right: 36px;
+.Cart{
+  margin-right: unset;
 }
 
 .counter {
@@ -84,6 +84,21 @@ a {
   position: relative;
   right: 52px;
   bottom: 5px;
+}
+
+.circle {
+  justify-items: center;
+  border: 4px solid red;
+  border-radius:100px;
+  color: antiquewhite;
+  background-color: red;
+  height: fit-content;
+  width: 15px;
+  font-size: 8px;
+  text-align: center;
+  font-weight: 900;
+  position: relative;
+  right: 10px;
 }
 
 .form-control {
@@ -224,7 +239,6 @@ h5 {
 }
 
 .t1 {
-  width: 357px;
   height: 65px;
   left: 241px;
   top: 240px;
@@ -427,3 +441,303 @@ h5 {
   width: 80px;
   border-radius: 50%;
 }
+
+/* profile */
+.previewPhoto{
+  display: flex;
+  width: 360px;
+  height: 50px;
+  border: 2px solid #BD0707;
+  background-color: #E0C8C840;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  justify-content: space-between;
+  color: black   ;
+  margin-bottom: 40px;
+}
+
+.profileContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 40px;
+}
+
+.profileContainer h1{
+  margin-bottom: 40px;
+
+}
+
+.profileLeft{
+  margin-right: 30px;
+}
+
+.profileLeft h1{
+  margin-bottom: 20px;
+  color: #BD0707;
+  font-weight: 600;
+}
+
+.profileRight {
+  margin-left: 20px;
+}
+
+.profileRight h1{
+  color: #613D2B;
+  font-weight: 600;
+}
+
+
+.biodata{
+  display: flex;
+  flex-direction: row;
+}
+
+.biodata img{
+  width: 241px;
+  height: 281px;
+  border-radius: 4px;
+}
+
+.biodata ul li{
+  list-style: none;
+}
+
+.biodataTitle{
+  font-size: 24px;
+  color: #613D2B;
+  font-weight: 700;
+}
+
+.biodataContent{
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+.btnProfile{
+  width: 240px;
+  height: 40px;
+  margin-right: 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 3px solid #BD0707;
+  color: #fff;
+  background-color: #BD0707;
+}
+
+
+/* profileCard */
+
+.profileCard{
+  display: flex;
+  flex-direction: row;
+  width: 650px;
+  background-color: #F6DADA;
+  border-radius: 5px;
+  justify-content: space-between;
+  padding: 20px 30px 0px 30px;
+}
+
+.contentCardLeft{
+  display: flex;
+  flex-direction: column;
+}
+
+.mapContent{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+
+.contentCardLeft ul li{
+  list-style: none;
+}
+
+.contentCardLeft img{
+  width: 100px;
+  height: 120px;
+  border-radius: 10px;
+}
+
+.profileCardTitle{
+  font-size: 20px;
+  font-weight: 700;
+  color: #BD0707;
+  margin-top: -2px;
+}
+
+.profileCardDate{
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #BD0707;
+  font-weight: 500;
+}
+.profileCardDate strong{
+  font-weight: 700;
+}
+
+.profileCardToping strong{
+  color: #974A4A;
+}
+
+.profileCardToping{
+  font-size: 14px;
+  color: #BD0707;
+  margin-bottom: 7px;
+}
+
+.profileCardPrice{
+  font-size: 14px;
+  color: #974A4A;
+}
+
+
+.contentCardRight img{
+  display: block ;
+  width: 70px;
+  height: 70px;
+  margin-left: 40px;
+  margin-bottom: 20px;
+}
+
+.contentCardRight{
+  justify-content: center;
+  text-align: center;
+}
+
+.Otw span {
+  margin-top: 20px;
+  display: block;
+  background: #00d0ff32;
+}
+
+.Pending span {
+  margin-top: 20px;
+  display: block;
+  background: #d1c00ba5;
+}
+
+.Cancel span {
+  margin-top: 20px;
+  display: block;
+  background: #bd07075f;
+}
+
+.Success span {
+  margin-top: 20px;
+  display: block;
+  background: #78a85a51;
+}
+
+.Otw span p{
+  color: #00d1ff;
+  font-weight: 600;
+}
+
+.Cancel span p{
+  color: #BD0707;
+  font-weight: 600;
+}
+
+.Success span p{
+  color: #78A85A;
+  font-weight: 600;
+}
+
+.profileSubTotal {
+  font-size: 15px;
+  font-weight: 700;
+  color: #974A4A;
+}
+
+/* modal profile */
+.modal-content{
+  background-color: white;
+  width: 420px !important;
+  margin: 150px auto;
+}
+
+.authContainer{
+  padding: 30px 30px 10px 30px;
+}
+
+.authTitle{
+  color: #BD0707;
+  margin-bottom: 20px;
+}
+
+.inputAuth{
+  display: block;
+  width: 100%;
+  height: 50px;
+  border: 2px solid #BD0707;
+  background-color: rgba(224, 200, 200, 0.25);
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.inputAuth:focus-visible{
+  padding-left: 10px;
+  outline: #BD0707;
+}
+
+.btnAuth{
+  width: 100%;
+  height: 45px;
+  background-color: #BD0707;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+
+::placeholder{
+  color: #d29595;
+  padding-left: 0px;
+}
+
+.toRegist{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.toRegist strong{
+  cursor: pointer;
+}
+
+.toRegist strong:active{
+  font-weight: 900;
+
+}
+
+.pp {
+  width: 55px;
+  height: 55px;
+  border-radius: 100%;
+}
+
+.addProfileImage {
+  display: flex;
+  width: 360px;
+  height: 50px;
+  border: 2px solid #bd0707;
+  background-color: #e0c8c840;
+  padding: 10px;
+  margin-bottom: 0;
+  border-radius: 5px;
+  justify-content: space-between;
+  color: #d29595;
+  margin-bottom: 40px;
+}
+
+/* .paperClip {
+  position: relative;
+  left: unset;
+  height: unset;
+} */

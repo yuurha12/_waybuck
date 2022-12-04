@@ -7,7 +7,7 @@ import AddProductImg from "../../assets/images/icon/product.svg";
 import LogoutIcon from "../../assets/images/icon/logout.svg";
 import { AppContexts } from "../contexts/AppContexts";
 
-function NavBarAdmin({ Logout }) {
+function NavBarAdmin() {
   const [show, setShow] = useState(false);
 
   const [target, setTarget] = useState(null);

@@ -1,11 +1,24 @@
-import React, {useState} from "react";
-import { useParams } from "react-router-dom";
-import { Container, Button, Card} from "react-bootstrap";
-import { useQuery, useMutation } from "react-query";
+// dependencies
+import { useNavigate, useParams } from "react-router-dom";
+import Rupiah from "rupiah-format";
+import { useState } from "react";
+import { useMutation, useQuery } from "react-query";
 import { API } from "../config/api";
+
+// style
+import productModules from "../style/css/product.module.css"
+
+// file
+import checkToping from "../assets/images/icon/green-check.svg";
+
+// component
 import NavBar from "../components/navbar/Navbar";
 
-function Detail() {
+export default function DetailProductPage() {
+  document.title = "Waysbucks | Product";
+
+  const navigate = useNavigate();
+  // check
   const [show, setShow] = useState(false);
 
   const handleCheck = () => {
@@ -40,7 +53,7 @@ function Detail() {
     setIdToping(toppingId);
   };
 
-  // fatching
+  // fetching
   let { id } = useParams();
   let { data: product } = useQuery("productCache", async () => {
     const response = await API.get("/product/" + id);
@@ -83,79 +96,77 @@ function Detail() {
 
       setIdToping([]);
       setToping([]);
+      navigate("/payment")
     } catch (error) {
       console.log(error);
     }
   });
 
-    return (
-        <>
-        <NavBar />
-        <Container className="mt-5 ps-5 d-flex">
-        <div>
-            <img src = {product?.image} className="coffee" alt="" />
-            
-        </div>
-
-        <div className="ms-5">
-            <div>
-             <h1 className="titleProduct">{product?.title}</h1>
+  return (
+    <>
+      <NavBar />
+      <div>
+        <section>
+          <div className={productModules.wrap}>
+            <div className={productModules.left}>
+              <img src={product?.image} alt="ProductImage" />
             </div>
-
-            <div className="priceProduct">
-            Rp. {product?.price}
-            </div>
-
-            <div className="mt-3">
-                <div className="T">Toping</div>
-                <>
-                <div className="Topping">
-                {toppings?.map((item, index)=>(
-                <Card className="cardtopping" key={index} >
-                   
-            
-                <Card.Img className="topimg" src={item?.image} />
-                <input
+            <div className={productModules.right}>
+              <span className={productModules.name}>
+                <p className={productModules.titleProduct}>{product?.title}</p>
+                <p className={productModules.priceBrown}>
+                  {Rupiah.convert(product?.price)}
+                </p>
+                <div className={productModules.toppings}>
+                  {toppings?.map((item, index) => (
+                    <div className={productModules.topping} key={index}>
+                      <label
+                        htmlFor={item?.id}
+                        className={productModules.checkContainer}
+                      >
+                        <input
                           type="checkbox"
                           id={item?.id}
                           onChange={handleChange}
                           value={item?.price}
                           name="toping"
+                          className={productModules.testCheck}
                         />
 
-               
-                <Card.Body >
-                <Card.Title className="titletopping" style={{ color: "#BD0707", }}>{item?.title}</Card.Title>
-                    
-                </Card.Body>
-                </Card>
-                ))}
+                        <img
+                          src={checkToping}
+                          alt="check"
+                          className={productModules.checkmark}
+                        />
+                        <img
+                          src={item?.image}
+                          alt="ToppingImage"
+                          onClick={handleCheck}
+                          className={productModules.imageTopping}
+                        />
+                      </label>
+                      <p>{item?.title.substring(0, 17)}</p>
+                    </div>
+                  ))}
                 </div>
-                </>
+              </span>
+              <div className={productModules.price}>
+                <p>Total</p>
+                <p>{Rupiah.convert(product?.price + resultTotal)}</p>
+              </div>
+              <div className={productModules.btn_grp}>
+                <button
+                  className={productModules.btn}
+                  onClick={(e) => handleSubmit.mutate(e)}
+                >
+                  {" "}
+                  Add Cart
+                </button>
+              </div>
             </div>
-
-            {/* <div>{getFormattedPrice(price)}</div> */}
-
-            <div className="Total">
-             <div>Total</div>
-             <div>Rp. {product?.price + resultTotal} </div>
-            </div>
-
-            <div>
-            <Button className="AddCart" variant="danger" onClick={(e) => handleSubmit.mutate(e)}>Add Cart</Button>
-            </div>
-               
-                   
-        </div>
-         
-        
-        </Container>
-        </>
-        
-        
-        )
-
+          </div>
+        </section>
+      </div>
+    </>
+  );
 }
-
-
-export default Detail;

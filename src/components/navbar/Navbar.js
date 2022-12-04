@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import LoginForm from "../auth/Login";
 import RegForm from "../auth/Register";
 import { Link } from "react-router-dom";
 
-// import { API } from "../config/api";
+import { API } from "../../config/api";
 
 //icon
 
@@ -21,6 +21,17 @@ const NavBar = ({ show, setShow }) => {
 
   const [state] = useContext(AppContexts);
   const isLogin = state.isLogin;
+
+  const [bubble, setBubble] = useState([])
+
+  useEffect(() => {
+    API.get("cart-id").then((res) => {
+      setBubble(res.dat.data);
+    })
+    .catch((err)=> console.log("error", err));
+  },[bubble]);
+
+  
 
   let redirect = null
   if (state.user.role === "admin") {

@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { API, setAuthToken } from './config/api';
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { API, setAuthToken } from "./config/api";
 
 //components
 // import NavBar from "./components/Navbar";
@@ -9,47 +9,46 @@ import { API, setAuthToken } from './config/api';
 //page
 import Home from "./pages/Home";
 import ProdDetail from "./pages/productDetail";
-import Profile from "./pages/Userprofile";
+import Profile from "./pages/profile";
 import Income from "./pages/incometransaction";
-import CartDigan from "./pages/Cart";
+import CartDigan from "./pages/cartPage";
 import AddProduct from "./pages/AddProduct";
-import AddToping from './pages/AddTopping';
+import AddToping from "./pages/AddTopping";
 
 //context
-import {AppContexts} from "./components/contexts/AppContexts";
+import { AppContexts } from "./components/contexts/AppContexts";
 
-
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 function App() {
   let navigate = useNavigate();
 
-  // Init user context 
+  // Init user context
   const [state, dispatch] = useContext(AppContexts);
 
   useEffect(() => {
-    if (localStorage.token) {
-  setAuthToken(localStorage.token)
-}
     // Redirect Auth
     if (state.isLogin === false) {
       navigate('/');
     } else {
-      if (state.user.role === 'admin') {
-        navigate('/income-transaction');
-      } else if (state.user.role === 'user') {
-        navigate('/');
+      if (state.user.role === "admin") {
+        navigate("/income-transaction");
+      } else if (state.user.role === "user") {
+        // navigate('/');
       }
     }
   }, [state]);
 
   const checkUser = async () => {
     try {
-      const response = await API.get('/check-auth');
+      const response = await API.get("/check-auth");
 
       // If the token incorrect
       if (response.status === 404) {
         return dispatch({
-          type: 'AUTH_ERROR',
+          type: "AUTH_ERROR",
         });
       }
 
@@ -60,7 +59,7 @@ function App() {
 
       // Send data to useContext
       dispatch({
-        type: 'USER_SUCCESS',
+        type: "USER_SUCCESS",
         payload,
       });
     } catch (error) {
@@ -73,15 +72,15 @@ function App() {
   }, []);
 
   return (
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/product-detail/:id" element={<ProdDetail />} />
-        <Route exact path="/profile" element={<Profile />} />
-        <Route exact path="/income-transaction" element={<Income />} />
-        <Route exact path="/payment" element={<CartDigan />} />
-        <Route exact path="/add-product" element={<AddProduct />} />
-        <Route exact path="/add-topping" element={<AddToping />} />
-      </Routes>
+    <Routes>
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/product-detail/:id" element={<ProdDetail />} />
+      <Route exact path="/profile" element={<Profile />} />
+      <Route exact path="/income-transaction" element={<Income />} />
+      <Route exact path="/payment" element={<CartDigan />} />
+      <Route exact path="/add-product" element={<AddProduct />} />
+      <Route exact path="/add-topping" element={<AddToping />} />
+    </Routes>
   );
 }
 
