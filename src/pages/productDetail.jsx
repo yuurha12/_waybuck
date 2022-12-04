@@ -1,7 +1,7 @@
 // dependencies
 import { useNavigate, useParams } from "react-router-dom";
 import Rupiah from "rupiah-format";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "react-query";
 import { API } from "../config/api";
 
@@ -101,6 +101,25 @@ export default function DetailProductPage() {
       console.log(error);
     }
   });
+
+  useEffect(() => {
+    //change this to the script source you want to load, for example this is snap.js sandbox env
+    const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+    //change this according to your client-key
+    const myMidtransClientKey = process.env.REACT_APP_MIDTRANS_CLIENT_KEY; // Get REACT_APP_MIDTRANS_CLIENT_KEY from ENV here ...
+
+    let scriptTag = document.createElement("script");
+    scriptTag.src = midtransScriptUrl;
+    // optional if you want to set script attribute
+    // for example snap.js have data-client-key attribute
+    scriptTag.setAttribute("data-client-key", myMidtransClientKey);
+
+    document.body.appendChild(scriptTag);
+    return () => {
+      document.body.removeChild(scriptTag);
+    };
+  }, []);
+
 
   return (
     <>
