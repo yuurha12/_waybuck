@@ -99,7 +99,6 @@ export default function AddProduct() {
 
       // Insert category data
       await API.post("/product", formData, config);
-      console.log(formData);
 
       navigate("/");
     } catch (error) {
