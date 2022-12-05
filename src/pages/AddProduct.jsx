@@ -58,9 +58,9 @@ export default function AddProduct() {
   const [preview, setPreview] = useState(null); //image
 
   const [form, setForm] = useState({
-    image: "",
     title: "",
     price: "",
+    image: "",
   }); //Store data product
 
   //handle chahnge data on from
