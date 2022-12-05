@@ -34,7 +34,7 @@ function App() {
       // navigate('/');
     } else {
       if (state.user.role === "admin") {
-       xxxx
+        // navigate("/income-transaction");
       } else if (state.user.role === "user") {
         // navigate('/');
       }
