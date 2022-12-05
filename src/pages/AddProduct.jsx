@@ -92,9 +92,9 @@ export default function AddProduct() {
       };
 
       const formData = new FormData();
-      formData.set("image", form.image[0], form.image[0].name);
       formData.set("title", form.title);
       formData.set("price", form.price);
+      formData.set("image", form.image[0], form.image[0].name);
 
       // Insert category data
       await API.post("/product", formData, config);
