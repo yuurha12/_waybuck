@@ -8,48 +8,6 @@ import paperClip from "../assets/images/icon/paperclip.svg";
 //api
 import { API } from "../config/api";
 
-const style = {
-  textTitle: {
-    fontWeight: "600",
-    fontSize: "32px",
-    lineHeight: "49px",
-
-    color: "#BD0707",
-  },
-
-  textRed: {
-    color: "#BD0707",
-  },
-
-  bgColor: {
-    backgroundColor: "#BD0707",
-  },
-
-  textCenter: {
-    textAlign: "center",
-  },
-
-  link: {
-    fontWeight: "bold",
-    textDecoration: "none",
-    color: "black",
-  },
-
-  ImgProduct: {
-    position: "relative",
-    width: "350px",
-  },
-
-  // Image Product 1
-  ImgLogo: {
-    position: "absolute",
-    width: "130px",
-    height: "auto",
-    top: "35%",
-    left: "77%",
-  },
-};
-
 export default function AddProduct() {
   const title = "Add Product";
   document.title = "Waysbucks | " + title;
@@ -99,7 +57,7 @@ export default function AddProduct() {
 
       // Insert category data
       await API.post("/product", formData, config);
-      console.log(formData);
+      console.log(handleSubmit);
 
       navigate("/");
     } catch (error) {

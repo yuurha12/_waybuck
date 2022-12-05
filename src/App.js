@@ -19,11 +19,11 @@ import AddToping from "./pages/AddTopping";
 import { AppContexts } from "./components/contexts/AppContexts";
 
 
+
 function App() {
-  let navigate = useNavigate();
-  
   // Init user context
   const [state, dispatch] = useContext(AppContexts);
+  const navigate = useNavigate();
   
   useEffect(() => {
     if (localStorage.token) {
@@ -31,12 +31,11 @@ function App() {
     }
     // Redirect Auth
     if (state.isLogin === false) {
-      // navigate('/');
+      navigate("/")
     } else {
       if (state.user.role === "admin") {
-        // navigate("/income-transaction");
+        navigate("/income-transaction");
       } else if (state.user.role === "user") {
-        // navigate('/');
       }
     }
   }, [state]);
@@ -45,16 +44,14 @@ function App() {
     try {
       const response = await API.get("/check-auth");
 
-      // If the token incorrect
       if (response.status === 404) {
         return dispatch({
           type: "AUTH_ERROR",
         });
       }
 
-      // Get user data
+      
       let payload = response.data.data;
-      // Get token from local storage
       payload.token = localStorage.token;
 
       // Send data to useContext
@@ -69,7 +66,7 @@ function App() {
 
   useEffect(() => {
     checkUser();
-  });
+  },[]);
 
   return (
     <Routes>
