@@ -23,11 +23,11 @@ if (localStorage.token) {
 }
 
 function App() {
-  let navigate = useNavigate();
-
+  
   // Init user context
   const [state, dispatch] = useContext(AppContexts);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     // Redirect Auth
     if (state.isLogin === false) {
@@ -69,7 +69,7 @@ function App() {
 
   useEffect(() => {
     checkUser();
-  }, []);
+  });
 
   return (
     <Routes>
