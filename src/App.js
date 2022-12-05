@@ -18,17 +18,17 @@ import AddToping from "./pages/AddTopping";
 //context
 import { AppContexts } from "./components/contexts/AppContexts";
 
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
 
 function App() {
+  let navigate = useNavigate();
   
   // Init user context
   const [state, dispatch] = useContext(AppContexts);
-  const navigate = useNavigate();
   
   useEffect(() => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
     // Redirect Auth
     if (state.isLogin === false) {
       navigate('/');
