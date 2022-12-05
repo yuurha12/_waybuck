@@ -31,10 +31,10 @@ function App() {
     }
     // Redirect Auth
     if (state.isLogin === false) {
-      navigate('/');
+      // navigate('/');
     } else {
       if (state.user.role === "admin") {
-        navigate("/income-transaction");
+        // navigate("/income-transaction");
       } else if (state.user.role === "user") {
         // navigate('/');
       }
