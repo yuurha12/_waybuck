@@ -75,6 +75,7 @@ export default function AddProduct() {
     if (e.target.type === "file") {
       let url = URL.createObjectURL(e.target.files[0]);
       setPreview(url);
+      setPreviewName(e.target.files[0].name);
     }
   };
 
