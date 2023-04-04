@@ -41,7 +41,7 @@ export default function Dropdown() {
       title={
         <img
           src={
-            photo?.image === "http://localhost:5000/uploads/"
+            photo?.image === "https://res.cloudinary.com/dfebjhjpu/image/upload/v1670185375/waysbucks/"
               ? PhotoProfile
               : photo?.image
           }
